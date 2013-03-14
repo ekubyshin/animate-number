@@ -2,7 +2,7 @@
 
     "use strict";
 
-    animateNumber = function(begin, end, cb, precision) {
+    var animateNumber = function(begin, end, cb, precision) {
 
         var value = begin,
             toValue = Math.abs(begin - end),
