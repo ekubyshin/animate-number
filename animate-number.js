@@ -1,33 +1,38 @@
-animateNumber = function(begin, end, cb, precision) {
+(function(Math, window){
 
     "use strict";
 
-    var value = begin,
-        toValue = Math.abs(begin - end),
-        counter = +(Math.ceil(toValue / 200) + ((Math.random() * 0.1 + 0.1).toFixed(precision || 0))),
-        interval;
+    animateNumber = function(begin, end, cb, precision) {
 
-    if (end < begin) {
+        var value = begin,
+            toValue = Math.abs(begin - end),
+            counter = +(Math.ceil(toValue / 200) + ((Math.random() * 0.1 + 0.1).toFixed(precision || 0))),
+            interval;
 
-        counter = -counter;
-    }
+        if (end < begin) {
 
-    interval = setInterval(
-            function() {
+            counter = -counter;
+        }
 
-                value += counter;
+        interval = setInterval(
+                function() {
 
-                if (value >= end &&
-                    counter > 0 ||
-                        value <= end &&
-                            counter < 0) {
+                    value += counter;
 
-                    clearInterval(interval);
-                    value = end;
-                }
+                    if (value >= end &&
+                        counter > 0 ||
+                            value <= end &&
+                                counter < 0) {
 
-                return cb(value.toFixed(precision || 0));
-            },
-            15
-        );
-};
+                        clearInterval(interval);
+                        value = end;
+                    }
+
+                    return cb(value.toFixed(precision || 0));
+                },
+                15
+            );
+    };
+
+    window.animateNumber = animateNumber;
+}(Math, window));
